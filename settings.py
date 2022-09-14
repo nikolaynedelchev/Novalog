@@ -9,6 +9,9 @@ class Workspace:
     def getName(self):
         return os.path.basename(self.rootFolder)
 
+    def getMasterFileName(self):
+        return self.rootFolder + '/Client Files/summary_masterfile.xlsx'
+
 workspace = Workspace()
 
 

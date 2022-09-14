@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import tools
 import settings
-
+import data_tests
 
 
 
@@ -17,7 +17,10 @@ main_layout = [
     [sg.Button(             'Delete buyer',                     key='-delete-buyer-')],
     [sg.Button(             'Autocorrect manual changes',       key='-autocorrect-')],
     [sg.FolderBrowse(       'Select workspace',                 key='-select-workspace-',       enable_events=True)],
-    [sg.Text(               '',                                 key='-workspace-folder-')]
+    [sg.Text(               '',                                 key='-workspace-folder-')],
+
+#########################################################    
+    [sg.Button(             'Do data test',       key='-do-data-test-')],
 ]
 
 win = sg.Window(title="Novalog Deliveries", layout=main_layout, finalize=True)
@@ -36,9 +39,11 @@ while True:
     event, values = win.read()
     if event == sg.WIN_CLOSED:
         break
-    if event == '-select-workspace-':
+    elif event == '-select-workspace-':
         settings.workspace.rootFolder = values['-select-workspace-']
         win['-workspace-folder-'].update(settings.workspace.getName())
+    elif event == '-do-data-test-':
+        data_tests.doTest()
 
     settings.save()
 

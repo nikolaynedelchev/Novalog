@@ -1,3 +1,4 @@
+from turtle import isvisible
 import PySimpleGUI as sg
 import tools
 import settings
@@ -32,12 +33,12 @@ def show_test_popup():
 
 
 class Foo:
-    def __init__(self, y=10, z=100) -> None:
+    def __init__(self, y=10, z=100, x = 12) -> None:
         self.y = y
         self.z = z
+        self.x = x
     def calc_me(self, num) -> int:
         return num + self.x + self.y + self.z
-    x = 12
 
 #------------------------------------------------------------
 
@@ -52,6 +53,8 @@ settings.save()
 
 
 f = Foo(11, 66)
+print(f.__dict__['x'])
+
 f2 = Foo(z=11, y=66)
 print(f.x)
 print(f.y)
@@ -70,23 +73,43 @@ f2 = tools.loadObject("test_data.txt", Foo())
 
 main_layout =    [   
                 [sg.Text('My first window')],
-                [sg.In('Enter something')],
-                [sg.Button('New win', key='-new-window-')]
+                [sg.In('Enter something', enable_events=True, key='-test-input-',
+                right_click_menu=['&Right', ['1', '2', '3']])],
+                [sg.Button('New win', key='-new-window-')],
+                [sg.OptionMenu(['Ehoo', 'Tove e', 'My first window', 'dropdown menu'],
+                    #enable_events=True,
+                    #readonly=False,
+                    key='-test-combo-'
+                    )]
             ]
 win = sg.Window(title="Hello Workd!", layout=main_layout, finalize=True)
 
-#move_center(win)
+move_center(win)
 x,y = 0,0
+isVis = False
 while True:
     x,y = win.CurrentLocation()
     event, values = win.read()
+    print(event)
+    print(values)
+
+
+    #cmb.TKRightClickMenu.tk_p
+    
+
+
     if event == sg.WIN_CLOSED:
         break
     elif event == '-new-window-':
         win.DisableClose = True
         show_test_popup()
         win.DisableClose = False
-
-
+    elif event == '-test-input-':
+        if isVis == False:
+            isVis = True
+            cmb = win['-test-input-']
+            cmb.TKRightClickMenu.tk_popup(cmb.Position[0], cmb.Position[1], 0)
+            cmb.TKRightClickMenu.grab_release()
+            cmb.set_focus(True)
 win.close()
 
