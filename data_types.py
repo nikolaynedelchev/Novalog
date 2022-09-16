@@ -28,11 +28,11 @@ class MasterRecord:
 
 masterRecordColumns = [
     ['docNum',              ('A', 'Doc Num')],
-    ['warehouse',           ('B', 'Warehouse ID')],
+    ['warehouse',           ('B', 'Warehouse')],
     ['terminal',            ('C', 'Terminal')],
     ['vesselName',          ('D', 'Vessel Name')],
     ['deliveryDate',        ('E', 'Delivery date')],
-    ['itemCode',            ('F', 'Item code')],
+    ['itemCode',            ('F', 'Item Code')],
     ['avizNo',              ('G', 'Aviz No.')],
     ['fertilizer',          ('H', 'Fertilizer')],
     ['truckGross',          ('I', 'Truck gross (mt)')],
