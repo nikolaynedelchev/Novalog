@@ -45,4 +45,4 @@ for c in range(ord('A'), ord('F') + 1):
 
 settings.load()
 
-#doTest()
+doTest()

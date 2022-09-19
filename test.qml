@@ -10,6 +10,7 @@ ApplicationWindow{
 
     ColumnLayout{
         spacing: 2
+
         Button{
             text: qsTr("Click me")
             onClicked:{
@@ -19,11 +20,20 @@ ApplicationWindow{
             }
         }
 
+        MyTestItem{
+            //myButton.text: "ohohohoho"
+            side: 150
+        }
+
+        MyTestItem2{
+        }
+
         Button{
             text: qsTr("Show subpage")
             onClicked:{
                 console.log("Sub page showing")
                 subPage.openSubPage()
+
             }
         }
     }
